@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "8806b2ad-fdce-46fd-bd5b-1df73ff52e68",
+		"name": "etutor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://[::1]/codeigniter3CRUD-main/API/users/user_list",
+					"protocol": "http",
+					"host": [
+						"[::1]"
+					],
+					"path": [
+						"codeigniter3CRUD-main",
+						"API",
+						"users",
+						"user_list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "praveen",
+							"type": "default"
+						},
+						{
+							"key": "phone_number",
+							"value": "9014919259",
+							"type": "default"
+						},
+						{
+							"key": "birth_date",
+							"value": "1995-08-10",
+							"type": "default"
+						},
+						{
+							"key": "email",
+							"value": "praveen@gmil.com",
+							"type": "default"
+						},
+						{
+							"key": "gender",
+							"value": "male",
+							"type": "default"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/prave/Downloads/0_pAdZLfSqNrMZAAPA-1645178466-id.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://[::1]/codeigniter3CRUD-main/API/users/crete_user",
+					"protocol": "http",
+					"host": [
+						"[::1]"
+					],
+					"path": [
+						"codeigniter3CRUD-main",
+						"API",
+						"users",
+						"crete_user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "21",
+							"type": "default"
+						},
+						{
+							"key": "name",
+							"value": "praveen1",
+							"type": "default"
+						},
+						{
+							"key": "phone_number",
+							"value": "9014919259",
+							"type": "default"
+						},
+						{
+							"key": "birth_date",
+							"value": "1995-08-10",
+							"type": "default"
+						},
+						{
+							"key": "email",
+							"value": "praveen@gmil.com",
+							"type": "default"
+						},
+						{
+							"key": "gender",
+							"value": "male",
+							"type": "default"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/prave/Downloads/0_pAdZLfSqNrMZAAPA-1645178466-id.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://[::1]/codeigniter3CRUD-main/API/users/edit_user",
+					"protocol": "http",
+					"host": [
+						"[::1]"
+					],
+					"path": [
+						"codeigniter3CRUD-main",
+						"API",
+						"users",
+						"edit_user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "212",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://[::1]/codeigniter3CRUD-main/API/users/detele_user",
+					"protocol": "http",
+					"host": [
+						"[::1]"
+					],
+					"path": [
+						"codeigniter3CRUD-main",
+						"API",
+						"users",
+						"detele_user"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
