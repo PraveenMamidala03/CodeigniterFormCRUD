@@ -44,10 +44,10 @@ class Admin extends CI_Controller {
 		
         if ($result) {
 			echo '<script>alert("registration successfully completed!");</script>';
-			redirect('users/users_list','refresh');
+			redirect('admin/users_list','refresh');
         } else {
             echo '<script>alert("registration failed please try again!");</script>';
-            redirect('users', 'refresh');
+            redirect('admin', 'refresh');
         }
 	}
 	public function users_list(){
