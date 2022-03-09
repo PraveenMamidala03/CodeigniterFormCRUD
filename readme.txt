@@ -6,6 +6,7 @@
 
 ->PFA postman Collection
 
+
 APIs
 ->user list base_url/API/users/user_list (get)
 
