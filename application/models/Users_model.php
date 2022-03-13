@@ -32,9 +32,6 @@ class Users_model extends CI_Model
 	}
 
 	public function Update_user_data($update, $id){
-		if (!is_array($update) || empty($update)) {
-            return array();
-        }
 		$this->db->where('id', $id);
 		$this->db->update('users', $update);
 		if ($this->db->affected_rows() > 0) {
@@ -51,5 +48,21 @@ class Users_model extends CI_Model
 	    }
      return NULL;
 	}
+	public function qualification_list(){
+		$query = $this->db->get('qualification');
+		if ($query->num_rows() >= 1) {
+            return $query->result();
+        }
+        return null;
+	}
+	public function getQualification($id){
+		$this->db->where('qualification_id', $id);
+		$query = $this->db->get('qualification_sub');
+		if ($query->num_rows() >= 1) {
+            return $query->result();
+        }
+        return null;
+	}
+
 }
 ?>

@@ -15,7 +15,7 @@
   
             <div class="box">
                <h1>Thank You</h1>
-               <p>Thank you for the registation will get back you soon</p>
+               <p style="color:aqua">Thank you for the registation, will get back to you soon</p>
                <div class="pyro">
                  <div class="before"></div>
                  <div class="after"></div>

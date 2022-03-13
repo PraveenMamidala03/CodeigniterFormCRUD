@@ -13,15 +13,20 @@ class Admin extends CI_Controller {
 		$this->load->view('users',$data);
 	}
 	public function create_user(){
-		$this->load->view('register_admin');
+		$this->load->view('adminAddUser');
 	}
 	public function register_action()
 	{
 		$name = $this->input->post('name');
-        $mobile = $this->input->post('phone_number');
-        $dfb = $this->input->post('birth_date');
-        $email = $this->input->post('email');
+		$email = $this->input->post('email');
+        $mobile = $this->input->post('phone');
+        $dfb = $this->input->post('dateofbirth');
         $gender = $this->input->post('gender');
+        $level_of_qualification = $this->input->post('level_of_qualification');
+        $qualification = $this->input->post('qualification');
+        $study = $this->input->post('study');
+        $course = $this->input->post('course');
+        $comment = $this->input->post('comment');
 		$current_datetime = date('Y-m-d H:i:s');
 		$image='';
 		if($_FILES['image']['name']!=""){
@@ -29,7 +34,7 @@ class Admin extends CI_Controller {
 		$tmp_name= $_FILES['image']['tmp_name'];
 		$data['image']=$image;
 		$path="assets/img/".$image;
-		$upload_files_status=move_uploaded_file($tmp_name,$path);
+		move_uploaded_file($tmp_name,$path);
 		}
 		$insert = array(
             'mobile' => $mobile,
@@ -38,17 +43,24 @@ class Admin extends CI_Controller {
             'gender' => $gender,
             'image' => $image,
             'email' => $email,
+            'level_of_qualification' => $level_of_qualification,
+            'qualification' => $qualification,
+            'study' => $study,
+            'course' => $course,
+            'comment' => $comment,
             'created_record' => $current_datetime
         );
 		$result = $this->users_model->User_Registration($insert);
 		
         if ($result) {
-			echo '<script>alert("registration successfully completed!");</script>';
-			redirect('admin/users_list','refresh');
+			$status=true;
+			$url =base_url('users/thanks');
         } else {
-            echo '<script>alert("registration failed please try again!");</script>';
-            redirect('admin', 'refresh');
+            $status=false;
+			$url ='';
         }
+		$res = array('status'=>$status,'url'=>$url);
+		echo json_encode($res); exit;
 	}
 	public function users_list(){
 		$data['users'] = $this->users_model->users_list();
@@ -56,15 +68,24 @@ class Admin extends CI_Controller {
 	}
 	public function user($id){
 		$data['user'] = $this->users_model->user_data($id);
-		$this->load->view('user_edit',$data);
+		$level_of_qualification= $data['user']->level_of_qualification;
+		$data['level_of_qualification']=$this->users_model->qualification_list();
+		$data['qualification']=  $this->users_model->getQualification($level_of_qualification);
+		$this->load->view('EditAddUser',$data);
 	}
 	public function user_edit(){
+		$update=array();
 		$name = $this->input->post('name');
 		$id = $this->input->post('id');
-        $mobile = $this->input->post('phone_number');
-        $dfb = $this->input->post('birth_date');
-        $email = $this->input->post('email');
+		$email = $this->input->post('email');
+        $mobile = $this->input->post('phone');
+        $dfb = $this->input->post('dateofbirth');
         $gender = $this->input->post('gender');
+        $level_of_qualification = $this->input->post('level_of_qualification');
+        $qualification = $this->input->post('qualification');
+        $study = $this->input->post('study');
+        $course = $this->input->post('course');
+        $comment = $this->input->post('comment');
 		$image='';
 		if($_FILES['image']['name']!=""){
 		$image=time().$_FILES['image']['name'];
@@ -78,26 +99,37 @@ class Admin extends CI_Controller {
             'name' => $name,
             'gender' => $gender,
             'image' => $image,
-            'email' => $email
+            'email' => $email,
+            'level_of_qualification' => $level_of_qualification,
+            'qualification' => $qualification,
+            'study' => $study,
+            'course' => $course,
+            'comment' => $comment,
         );
 		}else{
 			$update = array(
-            'mobile' => $mobile,
-            'date_of_birth' => $dfb,
-            'name' => $name,
-            'gender' => $gender,
-            'email' => $email
-        );
+				'mobile' => $mobile,
+				'date_of_birth' => $dfb,
+				'name' => $name,
+				'gender' => $gender,
+				'email' => $email,
+				'level_of_qualification' => $level_of_qualification,
+				'qualification' => $qualification,
+				'study' => $study,
+				'course' => $course,
+				'comment' => $comment,
+      	  );
 		}
-		
 		$result = $this->users_model->Update_user_data($update,$id);
-		 if ($result) {
-		 	echo '<script>alert("user data updated");</script>';
-			redirect('admin/users_list', 'refresh');
+		if ($result) {
+			$status=true;
+			$url =base_url('admin/users_list');
         } else {
-            echo '<script>alert("date edit failed!");</script>';
-            redirect('admin/users_list', 'refresh');
+            $status=false;
+			$url ='';
         }
+		$res = array('status'=>$status,'url'=>$url);
+		echo json_encode($res); exit;
 	}
 	public function user_delete($id){
 		$result = $this->users_model->Delete_user_data($id);
